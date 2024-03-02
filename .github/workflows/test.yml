@@ -8,6 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  POSTGRES_PASSWORD: not_a_secret
 
 jobs:
   build:
@@ -22,14 +23,14 @@ jobs:
     - name: start postgres
       run: |
         sudo systemctl start postgresql.service
-        sudo -u postgres createuser -s -d -r -w runner
+        echo "${POSTGRES_PASSWORD}" | sudo -u postgres createuser -s -d -r -P runner
     - name: do something with postgres
       run: |
-        echo "select 1, 'abc'" | psql 'postgres://runner:@localhost'
+        echo "select 1, 'abc'" | psql "postgres://runner:${POSTGRES_PASSWORD}@localhost"
     - name: do something with postgres 2
       run: |
         createdb foo
-        echo "select 1, 'abc'" | psql 'postgres://runner:@localhost/foo'
+        echo "select 1, 'abc'" | psql "postgres://runner:${POSTGRES_PASSWORD}@localhost/foo"
     #- name: cargo test
     #  run: cargo test --verbose
     #- name: run
