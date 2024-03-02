@@ -25,9 +25,11 @@ jobs:
         sudo -u postgres createuser -s -d -r -w runner
     - name: do something with postgres
       run: |
-        echo "select 1, 'abc'" | psql 'postgres://runner@localhost'
+        echo "select 1, 'abc'" | psql 'postgres://runner:@localhost'
+    - name: do something with postgres 2
+      run: |
         createdb foo
-        echo "select 1, 'abc'" | psql 'postgres://runner@localhost/foo'
+        echo "select 1, 'abc'" | psql 'postgres://runner:@localhost/foo'
     #- name: cargo test
     #  run: cargo test --verbose
     #- name: run
