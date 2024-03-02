@@ -2,7 +2,7 @@ use sqlx::postgres::{PgConnectOptions, PgPoolOptions};
 
 #[derive(Debug, sqlx::FromRow)]
 struct Ex {
-    a: i64,
+    a: i32,
     b: String,
 }
 
