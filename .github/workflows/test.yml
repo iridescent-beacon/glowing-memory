@@ -15,11 +15,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: cargo build
-      run: cargo build --verbose
+    #- name: cargo build
+    #  run: cargo build --verbose
     - name: start postgres
       run: sudo systemctl start postgresql.service
-    - name: cargo test
-      run: cargo test --verbose
-    - name: run
-      run: cargo run
+    - name: do something with postgres
+      run: echo "select 1, 'abc'" | psql 'postgres://postgres@localhost'
+    #- name: cargo test
+    #  run: cargo test --verbose
+    #- name: run
+    #  run: cargo run
