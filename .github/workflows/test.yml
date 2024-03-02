@@ -17,10 +17,17 @@ jobs:
     - uses: actions/checkout@v3
     #- name: cargo build
     #  run: cargo build --verbose
+    - name: whoami
+      run: whoami
     - name: start postgres
-      run: sudo systemctl start postgresql.service
+      run: |
+        sudo systemctl start postgresql.service
+        sudo -u postgres createuser -s -d -r -w runner
     - name: do something with postgres
-      run: echo "select 1, 'abc'" | psql 'postgres://postgres@localhost'
+      run: |
+        echo "select 1, 'abc'" | psql 'postgres://runner@localhost'
+        createdb foo
+        echo "select 1, 'abc'" | psql 'postgres://runner@localhost/foo'
     #- name: cargo test
     #  run: cargo test --verbose
     #- name: run
