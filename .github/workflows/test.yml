@@ -24,9 +24,6 @@ jobs:
       run: |
         sudo systemctl start postgresql.service
         echo -e "${POSTGRES_PASSWORD}\n${POSTGRES_PASSWORD}" | sudo -u postgres createuser -s -d -r -P runner
-    - name: do something with postgres
-      run: |
-        echo "select 1, 'abc'" | psql "postgres://runner:${POSTGRES_PASSWORD}@localhost"
     - name: do something with postgres 2
       run: |
         createdb foo
