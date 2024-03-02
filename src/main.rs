@@ -13,7 +13,9 @@ async fn main() {
     let conn_opt = PgConnectOptions::new()
         .host("localhost")
         .port(5432)
-        .username("postgres");
+        .username("runner")
+        .password("not_a_secret")
+        .database("foo");
 
     let pool = PgPoolOptions::new()
         .max_connections(1)

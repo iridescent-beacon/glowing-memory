@@ -16,8 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    #- name: cargo build
-    #  run: cargo build --verbose
+    - name: cargo build
+      run: cargo build --verbose
     - name: whoami
       run: whoami
     - name: start postgres
@@ -28,7 +28,7 @@ jobs:
       run: |
         createdb foo
         echo "select 1, 'abc'" | psql "postgres://runner:${POSTGRES_PASSWORD}@localhost/foo"
-    #- name: cargo test
-    #  run: cargo test --verbose
-    #- name: run
-    #  run: cargo run
+    - name: cargo test
+      run: cargo test --verbose
+    - name: run
+      run: cargo run
